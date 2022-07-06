@@ -92,15 +92,11 @@ class Command {
 
 }
 
-
-
-
 class GlobalCommand extends Command {
   constructor(cli: CAC) {
     super('@@global@@', '', {}, cli)
   }
 }
-
 
 ```
 
@@ -162,5 +158,6 @@ export default class Option {
 
 
 ```
+
 
 

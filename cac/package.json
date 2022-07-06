@@ -4,11 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cac": "^6.7.12"
+    "cac": "^6.7.12",
+    "mri": "^1.2.0"
+  },
+  "devDependencies": {
+    "vitest": "^0.17.0"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
