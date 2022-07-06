@@ -1,0 +1,14 @@
+lockfileVersion: 5.3
+
+specifiers:
+  cac: ^6.7.12
+
+dependencies:
+  cac: 6.7.12
+
+packages:
+
+  /cac/6.7.12:
+    resolution: {integrity: sha1-b7XqL/UL0BSQ29pJf0rnWplBUZM=}
+    engines: {node: '>=8'}
+    dev: false
