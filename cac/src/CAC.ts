@@ -1,21 +1,34 @@
+import mri from "mri"
+import { Command } from "./Command"
+import { OptionConfig } from "./Option"
 
 class CAC {
-  constructor() {}
+  private globalCommand: Command
 
-  option(rawName: string, description: string ) {
+  constructor() {
+    this.globalCommand = new Command()
+  }
 
+  option(rawName: string, description: string, config?: OptionConfig) {
+    this.globalCommand.option(rawName, description, config)
   }
 
   parse(rawArr: string[]) {
-      return {
-        args: [], 
-        options: {
-          type: "foo",
-          "--":[]
-        }
+    const mriResult = mri(rawArr)
+    console.log(mriResult, this.globalCommand.options)
+
+    const options = this.globalCommand.options.reduce((options, option) => {
+      options[option.name] = mriResult[option.name] || option.config.default
+      return options
+    }, {})
+    return {
+      args: [],
+      options: {
+        ...options,
+        "--": []
       }
+    }
   }
 }
-
 
 export default CAC
