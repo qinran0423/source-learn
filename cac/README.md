@@ -92,8 +92,31 @@
 
 ### 尝试通过单元测试调试库
 
-- 可以把你通过单元测试调试库的过程记录下来
-- 让别人可以基于你的记录也可以实现
+```js
+function snapshotOutput({
+  title,
+  file,
+  args,
+}: {
+  title: string{
+  file: string}
+  args?: string[]
+}) {
+  test(title, async () => {
+    const { stdout } = await execa('node', [example(file), ...(args || [])])
+    expect(stdout).toMatchSnapshot(title)
+  })
+}
+
+snapshotOutput({
+  title: 'basic-usage',
+  file: 'basic-usage.js',
+  args: ['foo', 'bar', '--type', 'ok', 'command'],
+})
+
+```
+基于这个测试用例 -- [我的思考](https://github.com/qinran0423/source-learn/blob/main/cac/MyThink.md)
+
 
 ### 这个库应该如何使用？ 
 
@@ -105,23 +128,38 @@
 - 概念
 - 在程序里面是如何实现的
 
+添加全局选项
+
 ### 如何理解 command 
 
 - 概念
 - 在程序里面是如何实现的
+
+创建命令实例。该选项还接受第三个参数config作为附加命令config：
+config.allowUnknownOptions: 布尔值允许此命令中存在未知选项。
+config.ignoreOptionDefaultValue: 在解析的选项中不使用选项的默认值，只在帮助消息中显示它们
+
 
 ### 如何理解 action 
 
 - 概念
 - 在程序里面是如何实现的
 
+当命令与用户输入匹配时，使用回调函数作为命令操作。
+
 ### 如何实现连续调用的api
 
 ![](https://images-1252602850.cos.ap-beijing.myqcloud.com/20220627173013.png)
 
+每次调用api的最后都会return this 则可以实现连续调用
+
 ### Brackets 应该如何使用
 
 - 方括号和尖括号有什么不同
+
+  - command: []表示可选， <>表示必传
+  - option: [] 传true, <> 传string / number 
+
 
 ### Brackets  是如何实现的
 
